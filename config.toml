@@ -1,6 +1,6 @@
 [SiliconFlow]
 enable = true                           # 是否启用此功能
-handle_all_messages = true               # 是否处理所有消息（不需要命令前缀）
+handle_all_messages = false               # 是否处理所有消息（不需要命令前缀）
 api-key = ""                            # 硅基流动API密钥，必填
 base-url = "https://api.siliconflow.cn/v1"  # 硅基流动API地址
 
