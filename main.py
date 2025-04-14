@@ -184,8 +184,16 @@ class SiliconFlow(PluginBase):
 
         # 检查是否是私聊消息
         is_private_chat = True
+
+        # 检查多种可能的群聊标识
         if "RoomWxid" in message and message["RoomWxid"]:
             is_private_chat = False
+        elif "FromWxid" in message and "@chatroom" in message["FromWxid"]:
+            is_private_chat = False
+        elif "chat_id" in message and "@chatroom" in message.get("chat_id", ""):
+            is_private_chat = False
+
+        logger.debug(f"消息类型检测: is_private_chat={is_private_chat}, message={message}")
 
         # 如果是私聊消息，则直接处理
         if is_private_chat and content.strip():
