@@ -138,7 +138,7 @@ class SiliconFlow(PluginBase):
             logger.error(traceback.format_exc())
             return f"调用API失败: {str(e)}"
 
-    @on_text_message(priority=50)
+    @on_text_message(priority=20)
     async def handle_text_message(self, bot: WechatAPIClient, message: dict):
         """处理文本消息"""
         if not self.enable:
@@ -236,7 +236,7 @@ class SiliconFlow(PluginBase):
 
         return True  # 不符合处理条件，允许后续插件处理
 
-    @on_at_message(priority=50)
+    @on_at_message(priority=20)
     async def handle_at_message(self, bot: WechatAPIClient, message: dict):
         """处理@消息"""
         if not self.enable:
