@@ -1,12 +1,16 @@
 [SiliconFlow]
-enable = true                           # 是否启用此功能
-handle_all_messages = false               # 是否处理所有消息（不需要命令前缀）
-api-key = ""                            # 硅基流动API密钥，必填
-base-url = "https://api.siliconflow.cn/v1"  # 硅基流动API地址
+enable = true
+handle_all_messages = false
+enable_private_chat = false
+enable_image_private = true
+cleanup_days = 3
 
-# 模型配置
-default-model = "Qwen/QwQ-32B"          # 默认使用的模型
-available-models = [                    # 可用模型列表
+[TextGeneration]
+enable = true
+api-key = ""  # 文本API密钥
+base-url = "https://api.siliconflow.cn/v1"  # 文本API基础URL
+default-model = "Qwen/QwQ-32B"  # 默认使用的语言模型
+available-models = [
     "Qwen/QwQ-32B",
     "Qwen/Qwen2.5-72B-Instruct",
     "Qwen/Qwen2.5-32B-Instruct",
@@ -15,18 +19,32 @@ available-models = [                    # 可用模型列表
     "THUDM/glm-4-9b-chat",
     "deepseek-ai/DeepSeek-R1"
 ]
+commands = ["硅基", "sf", "SiliconFlow"]
+max_tokens = 1500
+temperature = 0.7
+top_p = 0.7
+top_k = 50
+frequency_penalty = 0.5
 
-# 命令配置
-commands = ["硅基", "sf", "SiliconFlow"]  # 触发插件的命令
+[ImageGeneration]
+enable = true
+api-key = ""  # 图片API密钥
+base-url = "https://api.siliconflow.cn/v1"  # 图片API基础URL，也可以用LLM Red Team的即梦
+image-model = "Kwai-Kolors/Kolors"  # 图片生成模型
+image-size = "1024x1024"         # 生成图片尺寸
+image-batch-size = 4           # 每次生成的图片数量
+image-steps = 20               # 生成步数
+image-guidance-scale = 7.5     # 指导比例
+image-commands = ["画图", "绘图", "生成图片"]
 
-# Http代理设置
-# 格式: http://用户名:密码@代理地址:代理端口
-# 例如：http://127.0.0.1:7890
-http-proxy = ""
+[VisionRecognition]
+enable = true
+api-key = ""  # 视觉API密钥
+base-url = "https://api.siliconflow.cn/v1"  # 视觉API基础URL
+vision-model = "Qwen/Qwen2.5-VL-72B-Instruct"  # 视觉模型
+auto_analyze_images = true     # 是否自动分析图片
+vision_prompt = "请详细描述这张图片的内容"  # 图片分析默认提示词
 
-# 高级设置
-max_tokens = 4096                       # 最大token数
-temperature = 0.7                       # 温度参数
-top_p = 0.7                             # Top-p采样
-top_k = 50                              # Top-k采样
-frequency_penalty = 0.5                 # 频率惩罚
+[http-proxy]
+enable = false
+proxy = ""
