@@ -21,7 +21,7 @@ from utils.plugin_base import PluginBase
 class SiliconFlow(PluginBase):
     description = "硅基流动API插件"
     author = "老夏的金库"
-    version = "1.3.0"
+    version = "1.3.1"
     is_ai_platform = True
 
     def __init__(self):
@@ -570,7 +570,7 @@ class SiliconFlow(PluginBase):
                         logger.error("对话API返回格式错误")
                         return "无法解析响应"
 
-                    return result["choices"][0].get("message", {}).get("content", "无法获取回复")
+                    return result["choices"][0].get("message", {}).get("content", "无法获取回复").strip()
         except asyncio.TimeoutError:
             logger.error("对话API请求超时")
             return "请求超时，请稍后再试"
